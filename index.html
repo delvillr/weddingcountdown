@@ -1,106 +1,200 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@400;500&display=swap" rel="stylesheet">
 
 <style>
-body{
+
+*{
     margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
     background:#fffdf9;
-    color:#7b2c2d;
+    height:100vh;
     display:flex;
     justify-content:center;
     align-items:center;
-    min-height:100vh;
-    font-family:'Cormorant Garamond', serif;
+    overflow:hidden;
 }
 
 .countdown{
+
     display:flex;
+    align-items:flex-start;
     justify-content:center;
-    gap:50px;
-    flex-wrap:wrap;
+
+    font-family:'Bodoni Moda', serif;
+
+}
+
+.section{
+
+    width:185px;
     text-align:center;
+
 }
 
-.box{
-    min-width:90px;
+.days{
+
+    width:215px;
+
 }
 
-.number{
-    font-size:64px;
-    font-weight:500;
-    line-height:1;
+.value{
+
+    color:#7b2c2d;
+    font-size:86px;
+    font-weight:400;
+    line-height:.88;
+
 }
 
 .label{
-    margin-top:10px;
-    font-size:13px;
-    letter-spacing:3px;
+
+    margin-top:8px;
+
+    color:#7b2c2d;
+
+    font-size:16px;
+
+    letter-spacing:2.8px;
+
     text-transform:uppercase;
+
 }
 
-@media (max-width:650px){
-    .countdown{
-        gap:25px;
-    }
+.separator{
 
-    .number{
-        font-size:42px;
-    }
+    color:#c8a3a1;
+
+    font-size:70px;
+
+    line-height:1;
+
+    margin-top:-2px;
+
+    width:28px;
+
+    text-align:center;
+
+    font-family:'Bodoni Moda', serif;
+
 }
+
+@media(max-width:900px){
+
+.value{
+
+font-size:54px;
+
+}
+
+.section{
+
+width:105px;
+
+}
+
+.days{
+
+width:120px;
+
+}
+
+.separator{
+
+font-size:42px;
+
+width:18px;
+
+}
+
+.label{
+
+font-size:10px;
+
+letter-spacing:2px;
+
+}
+
+}
+
 </style>
+
 </head>
 
 <body>
 
 <div class="countdown">
 
-    <div class="box">
-        <div class="number" id="days">0</div>
-        <div class="label">Days</div>
+    <div class="section days">
+        <div class="value" id="days">000</div>
+        <div class="label">DAYS</div>
     </div>
 
-    <div class="box">
-        <div class="number" id="hours">0</div>
-        <div class="label">Hours</div>
+    <div class="section">
+        <div class="value" id="hours">00</div>
+        <div class="label">HOURS</div>
     </div>
 
-    <div class="box">
-        <div class="number" id="minutes">0</div>
-        <div class="label">Minutes</div>
+    <div class="separator">:</div>
+
+    <div class="section">
+        <div class="value" id="minutes">00</div>
+        <div class="label">MINUTES</div>
     </div>
 
-    <div class="box">
-        <div class="number" id="seconds">0</div>
-        <div class="label">Seconds</div>
+    <div class="separator">:</div>
+
+    <div class="section">
+        <div class="value" id="seconds">00</div>
+        <div class="label">SECONDS</div>
     </div>
 
 </div>
 
 <script>
-const weddingDate = new Date("July 24, 2027 16:00:00").getTime();
 
-function updateCountdown() {
+const weddingDate = new Date("2027-07-24T16:00:00").getTime();
+
+function updateCountdown(){
+
     const now = new Date().getTime();
+
     const distance = weddingDate - now;
 
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    const days = Math.floor(distance / (1000*60*60*24));
+
+    const hours = Math.floor((distance % (1000*60*60*24)) / (1000*60*60));
+
+    const minutes = Math.floor((distance % (1000*60*60)) / (1000*60));
+
+    const seconds = Math.floor((distance % (1000*60)) / 1000);
 
     document.getElementById("days").textContent = days;
-    document.getElementById("hours").textContent = hours;
-    document.getElementById("minutes").textContent = minutes;
-    document.getElementById("seconds").textContent = seconds;
+
+    document.getElementById("hours").textContent =
+        String(hours).padStart(2,"0");
+
+    document.getElementById("minutes").textContent =
+        String(minutes).padStart(2,"0");
+
+    document.getElementById("seconds").textContent =
+        String(seconds).padStart(2,"0");
+
 }
 
 updateCountdown();
-setInterval(updateCountdown, 1000);
+
+setInterval(updateCountdown,1000);
+
 </script>
 
 </body>
