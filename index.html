@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+body{
+    margin:0;
+    background:#fffdf9;
+    color:#7b2c2d;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+    font-family:'Cormorant Garamond', serif;
+}
+
+.countdown{
+    display:flex;
+    justify-content:center;
+    gap:50px;
+    flex-wrap:wrap;
+    text-align:center;
+}
+
+.box{
+    min-width:90px;
+}
+
+.number{
+    font-size:64px;
+    font-weight:500;
+    line-height:1;
+}
+
+.label{
+    margin-top:10px;
+    font-size:13px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+}
+
+@media (max-width:650px){
+    .countdown{
+        gap:25px;
+    }
+
+    .number{
+        font-size:42px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="countdown">
+
+    <div class="box">
+        <div class="number" id="days">0</div>
+        <div class="label">Days</div>
+    </div>
+
+    <div class="box">
+        <div class="number" id="hours">0</div>
+        <div class="label">Hours</div>
+    </div>
+
+    <div class="box">
+        <div class="number" id="minutes">0</div>
+        <div class="label">Minutes</div>
+    </div>
+
+    <div class="box">
+        <div class="number" id="seconds">0</div>
+        <div class="label">Seconds</div>
+    </div>
+
+</div>
+
+<script>
+const weddingDate = new Date("July 24, 2027 16:00:00").getTime();
+
+function updateCountdown() {
+    const now = new Date().getTime();
+    const distance = weddingDate - now;
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    document.getElementById("days").textContent = days;
+    document.getElementById("hours").textContent = hours;
+    document.getElementById("minutes").textContent = minutes;
+    document.getElementById("seconds").textContent = seconds;
+}
+
+updateCountdown();
+setInterval(updateCountdown, 1000);
+</script>
+
+</body>
+</html>
